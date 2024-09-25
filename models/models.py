@@ -6,7 +6,7 @@ try:
 except:
     from sqlalchemy.ext.declarative import declarative_base
 
-from sqlalchemy import Column, String, DateTime, Enum, Index, Boolean, Integer, Date, Interval, Double
+from sqlalchemy import Column, String, DateTime, Enum, Index, Boolean, Integer, Date, Interval, Double, BigInteger
 from models import utils
 from models.consts import TaxiTypes
 
@@ -52,6 +52,8 @@ class DimCoin(BASE):  # Data Model / Model
     # last_retrive_date = Column(Date, nullable=False, default=False)
     interval = Column(Interval, nullable=False, default=timedelta(days=1))
 
+
+    # enrichments: extra columns created at processing level to enhance or facilitate development/processing in later stages
     active = Column(Boolean, nullable=False, default=False)
     collected = Column(Boolean, nullable=False, default=False)
 
@@ -60,7 +62,7 @@ class DimCoin(BASE):  # Data Model / Model
 
     __table_args__ = (
         Index(
-            'idx_coins', 'iso', 'name', 'slug', 'active', 'collected', 'updated_at',
+            'idx_dim_coins', 'iso', 'name', 'slug', 'active', 'collected', 'updated_at',
         ),
         {'extend_existing': True, 'schema': SCHEMA, }
     )
@@ -71,7 +73,7 @@ class Coin(BASE):  # Data Model / Model
 
     iso = Column(String, nullable=False, )
     date = Column(Integer, nullable=False, )
-    hash = Column(Integer, primary_key=True)
+    hash = Column(BigInteger, primary_key=True)
     open = Column(Double, nullable=False, )
     high = Column(Double, nullable=False, )
     low = Column(Double, nullable=False, )

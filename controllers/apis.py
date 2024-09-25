@@ -32,6 +32,8 @@ def retrieve_data(uri, expect_to_be_bad=False):
 
     return result.json()
 
+
 def get_list_of_coins_at_source(expect_to_be_bad=True):
     investigation_hit = retrieve_data(URL, expect_to_be_bad=expect_to_be_bad)
     list_of_coin = investigation_hit['message'].split('[')[-1].strip(']').split(', ')
+    return list_of_coin

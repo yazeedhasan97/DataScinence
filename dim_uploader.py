@@ -26,14 +26,10 @@ def main():
     )
 
     factory.create_tables()
-
+    # return
     list_of_coin = get_list_of_coins_at_source()
-    # message = "['" + "', '".join(message) + "']"
     print(f"We have total coins of {len(list_of_coin)}")
     print(type(list_of_coin))
-    # lst = eval(message)
-    # print(lst)
-    # print(type(lst))
 
     today = datetime.today()
     yesterday = int((today - timedelta(days=1)).strftime('%Y%m%d'))
